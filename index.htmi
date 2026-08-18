@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Birthday Surprise 🎂</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe6ef, #fff7f9);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* OPEN PAGE */
+
+        .open-page {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .open-page h1 {
+            color: #ff4d73;
+            font-size: 42px;
+            margin-bottom: 30px;
+        }
+
+        .open-btn {
+            padding: 16px 45px;
+            font-size: 22px;
+            color: white;
+            background: #ff4d73;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+
+            box-shadow: 0 8px 20px rgba(255, 77, 115, 0.3);
+
+            transition: 0.3s;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.08);
+            background: #ff315e;
+        }
+
+
+        /* COUNTDOWN */
+
+        .countdown {
+            display: none;
+
+            height: 100vh;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+
+            color: #ff4d73;
+
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 80px;
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+            animation: pulse 1s infinite;
+        }
+
+        .countdown-text {
+            font-size: 28px;
+        }
+
+        @keyframes pulse {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+
+        /* MAIN CONTENT */
+
+        .main-content {
+            display: none;
+
+            min-height: 100vh;
+
+            padding: 40px;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+
+            width: 100%;
+            max-width: 1200px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 50px;
+        }
+
+
+        /* HEART IMAGE */
+
+        .heart-wrapper {
+
+            flex: 1;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            box-shadow: 0 10px 35px rgba(0,0,0,0.18);
+
+            background: white;
+
+            padding: 15px;
+
+            animation: heartAppear 1.5s ease;
+        }
+
+        .heart-wrapper img {
+
+            width: 100%;
+
+            max-height: 500px;
+
+            object-fit: cover;
+
+            border-radius: 18px;
+
+            display: block;
+        }
+
+
+        @keyframes heartAppear {
+
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+
+        /* BIRTHDAY TEXT */
+
+        .birthday-text {
+
+            flex: 1;
+
+            animation: textAppear 1.5s ease;
+        }
+
+        @keyframes textAppear {
+
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        }
+
+        .birthday-text h1 {
+
+            color: #ff4d73;
+
+            font-size: 45px;
+
+            margin-bottom: 20px;
+        }
+
+        .birthday-text p {
+
+            color: #444;
+
+            font-size: 20px;
+
+            line-height: 1.8;
+        }
+
+        .heart {
+
+            font-size: 35px;
+
+            margin-top: 20px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+
+            body {
+                overflow: auto;
+            }
+
+            .open-page h1 {
+
+                font-size: 30px;
+
+                padding: 20px;
+            }
+
+            .container {
+
+                flex-direction: column;
+
+                gap: 30px;
+            }
+
+            .main-content {
+
+                padding: 25px;
+            }
+
+            .birthday-text h1 {
+
+                font-size: 32px;
+            }
+
+            .birthday-text p {
+
+                font-size: 17px;
+            }
+
+            .countdown-number {
+
+                font-size: 60px;
+            }
+
+            .countdown-text {
+
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- OPEN SCREEN -->
+
+    <div class="open-page" id="openPage">
+
+        <h1>
+            🎁 I Have A Surprise For You 🎁
+        </h1>
+
+        <button class="open-btn" onclick="startSurprise()">
+
+            Open 💖
+
+        </button>
+
+    </div>
+
+
+
+    <!-- COUNTDOWN -->
+
+    <div class="countdown" id="countdown">
+
+        <div class="countdown-number" id="number">
+            3
+        </div>
+
+        <div class="countdown-text">
+            Seconds for Surprise... ✨
+        </div>
+
+    </div>
+
+
+
+    <!-- MAIN BIRTHDAY CONTENT -->
+
+    <div class="main-content" id="mainContent">
+
+        <div class="container">
+
+
+            <!-- HEART PICTURE -->
+
+            <div class="heart-wrapper">
+
+                <img src="heart.jpg" alt="Beautiful Heart">
+
+            </div>
+
+
+
+            <!-- BIRTHDAY PARAGRAPH -->
+
+            <div class="birthday-text">
+
+                <h1>
+                    Happy Birthday! 🎂🎉
+                </h1>
+
+                <p>
+
+                    On your special day, I just want to remind you
+                    how truly amazing you are. ❤️
+
+                    <br><br>
+
+                    May this new year of your life bring you endless
+                    happiness, good health, success and lots of beautiful
+                    moments.
+
+                    <br><br>
+
+                    May your life always be filled with love,
+                    happiness and beautiful memories. ✨
+
+                    <br><br>
+
+                    Keep smiling, keep shining and always stay the
+                    wonderful person you are.
+
+                    <br><br>
+
+                    Wishing you a very Happy Birthday once again! 💖🎂
+
+                </p>
+
+
+                <div class="heart">
+                    ❤️ ✨ 🎉
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function startSurprise() {
+
+            // Hide Open Page
+
+            document.getElementById("openPage").style.display = "none";
+
+
+            // Show Countdown
+
+            document.getElementById("countdown").style.display = "flex";
+
+
+            let number = 3;
+
+
+            let countdownNumber =
+                document.getElementById("number");
+
+
+            let timer = setInterval(function() {
+
+                number--;
+
+
+                if (number > 0) {
+
+                    countdownNumber.innerText = number;
+
+                }
+
+                else {
+
+                    clearInterval(timer);
+
+
+                    // Hide Countdown
+
+                    document.getElementById("countdown").style.display = "none";
+
+
+                    // Show Birthday Content
+
+                    document.getElementById("mainContent").style.display = "flex";
+
+                }
+
+            }, 1000);
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
